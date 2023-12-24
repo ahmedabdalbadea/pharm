@@ -1,3 +1,4 @@
+<?php include 'controllers/authcontroller.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,15 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <form method="post" action="signin.php">
+    <form method="post" action="signup.php">
         <h2>Sign Up</h2>
+        <?php if (count($errors) > 0): ?>
+            <div class="alert">
+            <?php foreach ($errors as $error): ?>
+            <li><?php echo $error ?></li>
+                <?php endforeach; ?>
+            </div>
+            <?php endif?>
         <div>
             <input type="text" placeholder="Name" id='name' name="name" autofocus>
        </div>
@@ -32,20 +40,8 @@
         </div>
             <button id="submit" onclick="validate()" name="create">Create Account</button>
             <p id="or">or</p>
-            <p>Already have an account? <a href="login.html">Log In</a></p>
+            <p>Already have an account? <a href="login.php">Log In</a></p>
     </form>
     <script src="Script/singup.js"></script>
-    <?php 
-    if (isset($_POST['create'])){
-        include('connect.php');
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $password = $_POST['password'];
-        $type = $_POST['type'];
-        $stm = "insert into usersvalues('$name','$email','$phone', '$password', '$type')";
-        $result = mysqli_query($conn, $stm);
-    }
-    ?>
 </body>
 </html>

@@ -1,3 +1,5 @@
+<?php include 'controllers/authcontroller.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +8,15 @@
     <title>Log In</title>
 </head>
 <body>
-    <form action="">
+    <form method="post">
         <h2>Log In</h2>
+        <?php if (count($errors) > 0): ?>
+            <div class="alert">
+            <?php foreach ($errors as $error): ?>
+            <li><?php echo $error ?></li>
+                <?php endforeach; ?>
+            </div>
+            <?php endif?>
         <div>
             <input type="email" placeholder="Email" name="email" required>
         </div>
@@ -16,7 +25,7 @@
         </div>
         <button id="submit" type="submit" name="login">Log in</button>
         <p id="or">or</p>
-        <p>Don't have an account? <a href="signin.php">Sign up</a></p>
+        <p>Don't have an account? <a href="signup.php">Sign up</a></p>
     </form>
 </body>
 </html>
